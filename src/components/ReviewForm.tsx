@@ -34,11 +34,19 @@ const ReviewForm = () => {
     setIsSubmitting(true);
 
     try {
-      // Reviews functionality not implemented yet
-      console.log('Review would be submitted:', { ...formData, rating });
-      
-      // Simulate successful submission
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const { error } = await supabase
+        .from('reviews')
+        .insert({
+          customer_name: formData.customer_name,
+          customer_email: formData.customer_email,
+          review_text: formData.review_text,
+          rating: rating,
+          is_approved: false
+        });
+
+      if (error) {
+        throw error;
+      }
 
       toast({
         title: "Review Submitted!",

@@ -34,13 +34,16 @@ const AdminPanel = ({ isOpen, onClose }: AdminPanelProps) => {
   const fetchReviews = async () => {
     setLoading(true);
     try {
-      // No reviews table exists yet
-      setReviews([]);
-      toast({
-        title: "Info",
-        description: "Reviews functionality not yet implemented",
-        variant: "default"
-      });
+      const { data, error } = await supabase
+        .from('reviews')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        throw error;
+      }
+
+      setReviews(data || []);
     } catch (error) {
       console.error('Error fetching reviews:', error);
       toast({
@@ -61,12 +64,21 @@ const AdminPanel = ({ isOpen, onClose }: AdminPanelProps) => {
 
   const updateReviewStatus = async (reviewId: string, isApproved: boolean) => {
     try {
-      // Reviews functionality not implemented yet
+      const { error } = await supabase
+        .from('reviews')
+        .update({ is_approved: isApproved })
+        .eq('id', reviewId);
+
+      if (error) {
+        throw error;
+      }
+
       toast({
-        title: "Info",
-        description: "Reviews functionality not yet implemented",
-        variant: "default"
+        title: "Success",
+        description: `Review ${isApproved ? 'approved' : 'rejected'} successfully`,
       });
+
+      fetchReviews();
     } catch (error) {
       toast({
         title: "Error",
@@ -78,12 +90,22 @@ const AdminPanel = ({ isOpen, onClose }: AdminPanelProps) => {
 
   const deleteReview = async (reviewId: string) => {
     try {
-      // Reviews functionality not implemented yet
+      const { error } = await supabase
+        .from('reviews')
+        .delete()
+        .eq('id', reviewId);
+
+      if (error) {
+        throw error;
+      }
+
       toast({
-        title: "Info",
-        description: "Reviews functionality not yet implemented",
-        variant: "default"
+        title: "Success",
+        description: "Review deleted successfully",
       });
+
+      fetchReviews();
+      setSelectedReviews(prev => prev.filter(id => id !== reviewId));
     } catch (error) {
       toast({
         title: "Error",
@@ -95,12 +117,22 @@ const AdminPanel = ({ isOpen, onClose }: AdminPanelProps) => {
 
   const bulkDeleteReviews = async (reviewIds: string[]) => {
     try {
-      // Reviews functionality not implemented yet
+      const { error } = await supabase
+        .from('reviews')
+        .delete()
+        .in('id', reviewIds);
+
+      if (error) {
+        throw error;
+      }
+
       toast({
-        title: "Info",
-        description: "Reviews functionality not yet implemented",
-        variant: "default"
+        title: "Success",
+        description: `${reviewIds.length} review(s) deleted successfully`,
       });
+
+      fetchReviews();
+      setSelectedReviews([]);
     } catch (error) {
       toast({
         title: "Error",
@@ -112,12 +144,22 @@ const AdminPanel = ({ isOpen, onClose }: AdminPanelProps) => {
 
   const deleteAllReviews = async () => {
     try {
-      // Reviews functionality not implemented yet
+      const { error } = await supabase
+        .from('reviews')
+        .delete()
+        .neq('id', '00000000-0000-0000-0000-000000000000'); // Delete all records
+
+      if (error) {
+        throw error;
+      }
+
       toast({
-        title: "Info",
-        description: "Reviews functionality not yet implemented",
-        variant: "default"
+        title: "Success",
+        description: "All reviews deleted successfully",
       });
+
+      fetchReviews();
+      setSelectedReviews([]);
     } catch (error) {
       toast({
         title: "Error",
