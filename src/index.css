@@ -1,0 +1,433 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Paintball Adventure Design System - Military/Adventure Aesthetic
+All colors MUST be HSL. Tactical color scheme with action-focused design elements.
+*/
+
+@layer base {
+  :root {
+    /* Base colors - Light mode */
+    --background: 0 0% 97%;
+    --foreground: 0 0% 15%;
+
+    /* Card components */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 15%;
+
+    /* Popover components */
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 15%;
+
+    /* Primary - Military Green */
+    --primary: 100 50% 15%;
+    --primary-foreground: 0 0% 98%;
+    --primary-glow: 100 60% 25%;
+
+    /* Secondary - Tactical Dark */
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 98%;
+
+    /* Muted tones */
+    --muted: 0 0% 92%;
+    --muted-foreground: 0 0% 40%;
+
+    /* Accent - Bright Orange */
+    --accent: 15 100% 60%;
+    --accent-foreground: 0 0% 98%;
+    --accent-glow: 15 100% 70%;
+
+    /* Alert/Danger */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Borders and inputs */
+    --border: 0 0% 88%;
+    --input: 0 0% 88%;
+    --ring: 100 50% 15%;
+
+    /* Design tokens */
+    --radius: 0.5rem;
+
+    /* Custom tactical gradients */
+    --gradient-tactical: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    --gradient-action: linear-gradient(45deg, hsl(var(--accent)), hsl(var(--accent-glow)));
+    --gradient-hero: linear-gradient(180deg, transparent 0%, hsl(var(--secondary) / 0.8) 100%);
+
+    /* Shadows with tactical colors */
+    --shadow-tactical: 0 10px 30px -10px hsl(var(--primary) / 0.3);
+    --shadow-action: 0 0 40px hsl(var(--accent) / 0.4);
+    --shadow-elevated: 0 20px 50px -15px hsl(var(--secondary) / 0.4);
+
+    /* Animation easing */
+    --ease-tactical: cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: all 0.3s var(--ease-tactical);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Dark mode - Enhanced tactical theme */
+    --background: 0 0% 8%;
+    --foreground: 0 0% 95%;
+
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 100 60% 35%;
+    --primary-foreground: 0 0% 98%;
+    --primary-glow: 100 70% 45%;
+
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 60%;
+
+    --accent: 15 100% 65%;
+    --accent-foreground: 0 0% 98%;
+    --accent-glow: 15 100% 75%;
+
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 22%;
+    --input: 0 0% 22%;
+    --ring: 100 60% 35%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+/* Skewed CTA Button Styles */
+.cta-skewed {
+  display: flex;
+  padding: 8px 30px;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  font-style: italic;
+  font-weight: 900;
+  font-size: 18px;
+  color: white;
+  background: hsl(var(--accent));
+  transition: 1s;
+  box-shadow: 4px 4px 0 hsl(var(--accent-glow));
+  transform: skewX(-15deg);
+  border: none;
+  cursor: pointer;
+}
+
+/* Mobile responsive styling */
+@media (max-width: 768px) {
+  .cta-skewed {
+    padding: 6px 20px;
+    font-size: 14px;
+    box-shadow: 6px 6px 0 hsl(var(--accent-glow));
+    transition: 0.5s;
+  }
+  
+  /* Always show all 3 arrows on mobile */
+  .cta-skewed span:nth-child(2) {
+    margin-right: 30px;
+    transition: 0.5s;
+  }
+  
+  /* Override default arrow positions to show all 3 arrows */
+  .cta-skewed path.one {
+    transform: translateX(0%) !important;
+    animation: color_anim 1s infinite 0.6s;
+    transition: 0.4s;
+  }
+  
+  .cta-skewed path.two {
+    transform: translateX(0%) !important;
+    animation: color_anim 1s infinite 0.4s;
+    transition: 0.5s;
+  }
+  
+  .cta-skewed path.three {
+    transform: translateX(0%);
+    animation: color_anim 1s infinite 0.2s;
+  }
+}
+
+.cta-skewed:focus {
+  outline: none; 
+}
+
+.cta-skewed:hover {
+  transition: 0.5s;
+  box-shadow: 6px 6px 0 hsl(var(--accent-glow));
+}
+
+.cta-skewed span:nth-child(2) {
+  transition: 0.5s;
+  margin-right: 0px;
+}
+
+.cta-skewed:hover span:nth-child(2) {
+  transition: 0.5s;
+  margin-right: 30px;
+}
+
+.cta-skewed span {
+  transform: skewX(15deg);
+}
+
+.cta-skewed span:nth-child(2) {
+  width: 16px;
+  margin-left: 20px;
+  position: relative;
+  top: 12%;
+}
+
+/* SVG Path Animations */
+.cta-skewed path.one {
+  transition: 0.4s;
+  transform: translateX(-60%);
+}
+
+.cta-skewed path.two {
+  transition: 0.5s;
+  transform: translateX(-30%);
+}
+
+.cta-skewed:hover path.three {
+  animation: color_anim 1s infinite 0.2s;
+}
+
+.cta-skewed:hover path.one {
+  transform: translateX(0%);
+  animation: color_anim 1s infinite 0.6s;
+}
+
+.cta-skewed:hover path.two {
+  transform: translateX(0%);
+  animation: color_anim 1s infinite 0.4s;
+}
+
+@keyframes color_anim {
+  0% {
+    fill: white;
+  }
+  50% {
+    fill: hsl(var(--accent-glow));
+  }
+  100% {
+    fill: white;
+  }
+}
+
+/* 3D Slider Styles */
+.slider-3d-banner {
+  width: 100%;
+  height: 60vh; /* Decreased height on mobile */
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  background-color: hsl(var(--secondary));
+  background-image:
+    repeating-linear-gradient(
+      to right, transparent 0 100px,
+      hsl(var(--border) / 0.1) 100px 101px
+    ),
+    repeating-linear-gradient(
+      to bottom, transparent 0 100px,
+      hsl(var(--border) / 0.1) 100px 101px
+    );
+}
+
+/* Desktop height */
+@media (min-width: 768px) {
+  .slider-3d-banner {
+    height: 100vh;
+  }
+}
+
+.slider-3d-container {
+  position: absolute;
+  width: 200px;
+  height: 250px;
+  top: 10%;
+  left: calc(50% - 100px);
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+  animation: slider3dAutoRun 20s linear infinite;
+  z-index: 2;
+}
+
+@keyframes slider3dAutoRun {
+  from {
+    transform: perspective(1000px) rotateX(-16deg) rotateY(0deg);
+  }
+  to {
+    transform: perspective(1000px) rotateX(-16deg) rotateY(360deg);
+  }
+}
+
+.slider-3d-item {
+  position: absolute;
+  inset: 0 0 0 0;
+  transform:
+    rotateY(calc( (var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+    translateZ(550px);
+}
+
+.slider-3d-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px hsl(var(--foreground) / 0.3);
+}
+
+.slider-3d-content {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1400px, 100vw);
+  height: max-content;
+  padding-bottom: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1;
+}
+
+.slider-3d-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16rem;
+  line-height: 1em;
+  color: hsl(var(--foreground));
+  position: relative;
+  font-weight: 900;
+}
+
+.slider-3d-title::after {
+  position: absolute;
+  inset: 0 0 0 0;
+  content: attr(data-content);
+  z-index: 2;
+  -webkit-text-stroke: 2px hsl(var(--muted));
+  color: transparent;
+}
+
+.slider-3d-author {
+  font-family: 'Poppins', sans-serif;
+  text-align: right;
+  max-width: 200px;
+}
+
+.slider-3d-subtitle {
+  font-size: 3rem;
+  color: hsl(var(--foreground));
+  font-weight: 700;
+}
+
+.slider-3d-author p {
+  color: hsl(var(--muted-foreground));
+  margin-top: 1rem;
+}
+
+/* Responsive Design for 3D Slider */
+@media screen and (max-width: 1023px) {
+  .slider-3d-container {
+    width: 160px;
+    height: 200px;
+    left: calc(50% - 80px);
+  }
+  
+  .slider-3d-item {
+    transform:
+      rotateY(calc( (var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+      translateZ(300px);
+  }
+  
+  .slider-3d-title {
+    text-align: center;
+    width: 100%;
+    text-shadow: 0 10px 20px hsl(var(--foreground) / 0.8);
+    font-size: 7rem;
+  }
+  
+  .slider-3d-author {
+    color: hsl(var(--foreground));
+    padding: 20px;
+    text-shadow: 0 10px 20px hsl(var(--foreground) / 0.8);
+    z-index: 2;
+    max-width: unset;
+    width: 100%;
+    text-align: center;
+    padding: 0 30px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .slider-3d-banner {
+    height: 50vh;
+  }
+  
+  .slider-3d-container {
+    width: 140px;
+    height: 200px;
+    left: calc(50% - 70px);
+  }
+  
+  .slider-3d-item {
+    transform:
+      rotateY(calc( (var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+      translateZ(250px);
+  }
+  
+  .slider-3d-title {
+    font-size: 5rem;
+  }
+  }
+
+  /* Custom pulse animation with zoom effect */
+  @keyframes pulse-scale {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html, body {
+    @apply bg-background text-foreground;
+    margin: 0;
+    padding: 0;
+  }
+}
