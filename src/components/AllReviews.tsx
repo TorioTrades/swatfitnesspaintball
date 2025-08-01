@@ -23,8 +23,17 @@ const AllReviews = () => {
   const fetchReviews = async () => {
     setLoading(true);
     try {
-      // Reviews functionality not implemented yet
-      setReviews([]);
+      const { data, error } = await supabase
+        .from('reviews')
+        .select('*')
+        .eq('is_approved', true)
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        throw error;
+      }
+
+      setReviews(data || []);
     } catch (error) {
       console.error('Error fetching reviews:', error);
     } finally {

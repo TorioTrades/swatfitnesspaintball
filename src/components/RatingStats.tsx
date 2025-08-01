@@ -20,12 +20,36 @@ const RatingStats = () => {
   useEffect(() => {
     const fetchRatingStats = async () => {
       try {
-        // Reviews functionality not implemented yet
-        setRatingData({
-          averageRating: 0,
-          totalReviews: 0,
-          ratingDistribution: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }
-        });
+        const { data, error } = await supabase
+          .from('reviews')
+          .select('rating')
+          .eq('is_approved', true);
+
+        if (error) {
+          throw error;
+        }
+
+        if (data && data.length > 0) {
+          const totalReviews = data.length;
+          const averageRating = data.reduce((sum, review) => sum + review.rating, 0) / totalReviews;
+          
+          const ratingDistribution = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+          data.forEach(review => {
+            ratingDistribution[review.rating]++;
+          });
+
+          setRatingData({
+            averageRating: Math.round(averageRating * 10) / 10,
+            totalReviews,
+            ratingDistribution
+          });
+        } else {
+          setRatingData({
+            averageRating: 0,
+            totalReviews: 0,
+            ratingDistribution: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }
+          });
+        }
       } catch (error) {
         console.error('Error fetching rating stats:', error);
       } finally {
