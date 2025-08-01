@@ -26,7 +26,12 @@ const Header = () => {
   }];
 
   const handleNavClick = (href: string) => {
-    if (href === '#booking') {
+    if (href === '#') {
+      const heroElement = document.querySelector('#hero');
+      if (heroElement) {
+        heroElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else if (href === '#booking') {
       navigate('/booking');
       setTimeout(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });

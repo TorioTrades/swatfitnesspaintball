@@ -15,7 +15,7 @@ const Hero = () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 100);
   };
-  return <section className="relative h-[80vh] md:h-screen flex items-end justify-center -mt-16 pt-16">
+  return <section id="hero" className="relative h-[80vh] md:h-screen flex items-end justify-center -mt-16 pt-16">
       {/* Background Video with Overlay */}
       <div className="absolute inset-0">
         {/* Desktop Video */}
