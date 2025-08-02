@@ -143,11 +143,6 @@ export const AppointmentCalendar: React.FC<AppointmentCalendarProps> = ({
       return true;
     }
 
-    // Disable Sundays (0 = Sunday)
-    if (date.getDay() === 0) {
-      return true;
-    }
-
     // Check if entire day is unavailable
     const dateStr = format(date, 'yyyy-MM-dd');
     return unavailableSchedules.some(schedule => 
@@ -298,7 +293,7 @@ export const AppointmentCalendar: React.FC<AppointmentCalendarProps> = ({
               className="rounded-md border"
             />
             <div className="mt-4 space-y-2 text-sm text-muted-foreground">
-              <p>• Paintball sessions available Monday - Saturday</p>
+              <p>• Paintball sessions available 7 days a week</p>
               <p>• Book up to 2 months in advance</p>
               {serviceType === 'target-range' ? (
                 <>
