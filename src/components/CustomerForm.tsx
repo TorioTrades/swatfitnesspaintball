@@ -60,7 +60,7 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
   const services = ['Paintball Regular (P 700 + 30 bullets)', 'Target Range Regular (P 250 + 10 bullets)', 'Half Day Morning (8AM-12NN) - P 18,000', 'Half Day Afternoon (1PM-5PM) - P 20,000', 'Group Package - 10 Players (9+1 FREE)', 'Group Package - 15 Players (14+1 FREE)', 'Group Package - 20 Players (19+1 FREE)'];
   const experienceLevels = ['First Time Player', 'Beginner (1-3 times)', 'Intermediate (4-10 times)', 'Experienced (10+ times)', 'Expert/Competitive Player'];
   const handleCopyGCashNumber = () => {
-    navigator.clipboard.writeText('09151933965');
+    navigator.clipboard.writeText('09178113010');
     toast({
       title: "Copied!",
       description: "GCash number copied to clipboard"
@@ -245,7 +245,7 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
                   <img src="/lovable-uploads/829cb545-0822-47ec-baba-ef93199459a7.png" alt="GCash Logo" className="w-8 h-8 object-contain" />
                   <div className="flex-1">
                     <Label className="text-sm font-medium">GCash Number</Label>
-                    <p className="text-lg font-mono font-bold">09151933965</p>
+                    <p className="text-lg font-mono font-bold">09178113010</p>
                   </div>
                   <Button type="button" variant="outline" size="sm" onClick={handleCopyGCashNumber} className="flex items-center gap-2">
                     <Copy className="w-4 h-4" />
